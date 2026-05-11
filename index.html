@@ -584,24 +584,99 @@
     .d4  { animation-delay: .44s; }
     .d5  { animation-delay: .57s; }
 
-    /* ─── MOBILE ─── */
-    @media (max-width: 768px) {
-      nav { padding: 0 4vw; }
-      nav ul { display: none; }
-      section { padding: 70px 4vw; }
-      .how-top, .services-top { grid-template-columns: 1fr; gap: 2rem; }
-      .steps { grid-template-columns: 1fr; }
-      .step { border-right: none; border-bottom: 1px solid var(--border); }
-      .step:last-child { border-bottom: none; }
+    /* ─── HAMBURGER ─── */
+    .ham {
+      display: none;
+      flex-direction: column; justify-content: center; align-items: center;
+      gap: 5px; width: 40px; height: 40px; cursor: pointer;
+      background: none; border: 1px solid var(--border);
+      border-radius: 7px; padding: 0; flex-shrink: 0;
+    }
+    .ham span {
+      display: block; width: 18px; height: 1.5px;
+      background: var(--text); border-radius: 2px;
+      transition: transform .25s, opacity .2s;
+    }
+    .ham.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .ham.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .ham.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+    /* ─── MOBILE NAV PANEL ─── */
+    .nav-panel {
+      display: none;
+      position: fixed; top: 68px; left: 0; right: 0;
+      background: rgba(8,8,18,0.97);
+      backdrop-filter: blur(24px);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 5vw 1.75rem;
+      z-index: 98;
+      flex-direction: column;
+    }
+    .nav-panel.open { display: flex; }
+    .nav-panel a {
+      font-family: var(--outfit);
+      font-size: .95rem; font-weight: 500;
+      color: var(--muted); text-decoration: none;
+      padding: .85rem 0;
+      border-bottom: 1px solid var(--border);
+      transition: color .2s;
+    }
+    .nav-panel a:last-of-type { border-bottom: none; }
+    .nav-panel a:hover, .nav-panel a:active { color: var(--text); }
+    .nav-panel .np-cta {
+      margin-top: 1.25rem;
+      font-family: var(--syne);
+      font-size: .8rem; font-weight: 700;
+      letter-spacing: .07em; text-transform: uppercase;
+      color: var(--bg); background: var(--cyan);
+      padding: 13px 24px; border-radius: 6px;
+      text-decoration: none; text-align: center;
+      display: block; transition: opacity .2s;
+    }
+    .nav-panel .np-cta:hover { opacity: .88; }
+
+    /* ─── TABLET (960px) ─── */
+    @media (max-width: 960px) {
+      h1 { font-size: clamp(2.2rem, 6.5vw, 5.75rem); }
+      section { padding: 80px 5vw; }
       .services-grid { grid-template-columns: 1fr; }
       .work-layout { grid-template-columns: 1fr; gap: 3rem; }
       .mock-browser { display: none; }
       .about-layout { grid-template-columns: 1fr; gap: 3rem; }
       .about-sticky { position: static; }
       .contact-layout { grid-template-columns: 1fr; gap: 3.5rem; }
+    }
+
+    /* ─── MOBILE (768px) ─── */
+    @media (max-width: 768px) {
+      nav { padding: 0 4vw; }
+      nav ul { display: none; }
+      .nav-btn { display: none; }
+      .ham { display: flex; }
+      h1 { font-size: clamp(1.9rem, 7.5vw, 3rem); }
+      #hero { padding: 100px 4vw 70px; }
+      section { padding: 64px 4vw; }
+      .how-top, .services-top { grid-template-columns: 1fr; gap: 1.75rem; }
+      .steps { grid-template-columns: 1fr; }
+      .step { border-right: none; border-bottom: 1px solid var(--border); }
+      .step:last-child { border-bottom: none; }
       .frow { grid-template-columns: 1fr; }
       footer { flex-direction: column; text-align: center; }
       .fnav { justify-content: center; }
+      .hero-checklist { gap: .9rem; }
+      .check-item { font-size: .78rem; }
+    }
+
+    /* ─── SMALL MOBILE (480px) ─── */
+    @media (max-width: 480px) {
+      h1 { font-size: clamp(1.75rem, 8vw, 2.4rem); }
+      .s-title { font-size: clamp(1.6rem, 6vw, 2rem); }
+      .hero-actions { flex-direction: column; }
+      .btn { text-align: center; }
+      .hero-checklist { flex-direction: column; gap: .6rem; }
+      .svc-card { padding: 1.75rem 1.5rem; }
+      .step { padding: 2rem 1.5rem; }
+      .copt { padding: 1rem 1.1rem; }
     }
   </style>
 </head>
@@ -618,7 +693,20 @@
       <li><a href="#contact">Contact</a></li>
     </ul>
     <a href="https://calendar.app.google/y85EFNESt3EtmsFr6" target="_blank" rel="noopener" class="nav-btn">Free Discovery Call</a>
+    <button class="ham" id="hamBtn" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
   </nav>
+
+  <!-- MOBILE NAV PANEL -->
+  <div class="nav-panel" id="navPanel">
+    <a href="#how" class="np-link">How It Works</a>
+    <a href="#services" class="np-link">Services</a>
+    <a href="#work" class="np-link">Work</a>
+    <a href="#about" class="np-link">About</a>
+    <a href="#contact" class="np-link">Contact</a>
+    <a href="https://calendar.app.google/y85EFNESt3EtmsFr6" target="_blank" rel="noopener" class="np-cta">Book Free Discovery Call</a>
+  </div>
 
   <!-- HERO -->
   <section id="hero">
@@ -929,5 +1017,33 @@
     </ul>
   </footer>
 
+  <script>
+    const hamBtn = document.getElementById('hamBtn');
+    const navPanel = document.getElementById('navPanel');
+
+    hamBtn.addEventListener('click', () => {
+      const open = navPanel.classList.toggle('open');
+      hamBtn.classList.toggle('open', open);
+      document.body.style.overflow = open ? 'hidden' : '';
+    });
+
+    // Close panel when a nav link is clicked
+    navPanel.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navPanel.classList.remove('open');
+        hamBtn.classList.remove('open');
+        document.body.style.overflow = '';
+      });
+    });
+
+    // Close panel on outside click
+    document.addEventListener('click', (e) => {
+      if (!navPanel.contains(e.target) && !hamBtn.contains(e.target)) {
+        navPanel.classList.remove('open');
+        hamBtn.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+    });
+  </script>
 </body>
 </html>
