@@ -613,6 +613,119 @@
 
     .arrow-link:hover { gap: 12px; }
 
+    /* ─── AUTO GRID ─── */
+    .auto-subhead {
+      margin: 4rem 0 2rem;
+      padding-top: 3.5rem;
+      border-top: 1px solid var(--border);
+      text-align: center;
+    }
+
+    .auto-subhead .s-label { margin-bottom: .75rem; }
+
+    .auto-subhead-title {
+      font-family: var(--grotesk);
+      font-size: 1.4rem; font-weight: 700;
+      letter-spacing: -.02em;
+      color: var(--text);
+    }
+
+    .auto-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .auto-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 32px;
+      transition: border-color .25s, background .25s, transform .2s;
+    }
+
+    .auto-card:hover {
+      border-color: var(--border2);
+      background: var(--card-hover);
+      transform: translateY(-2px);
+    }
+
+    .flow-pipeline {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 1.75rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .flow-node {
+      background: rgba(79,142,247,.1);
+      border: 1px solid rgba(79,142,247,.2);
+      color: var(--blue-bright);
+      font-size: .65rem; font-weight: 700;
+      letter-spacing: .05em; text-transform: uppercase;
+      padding: 5px 11px; border-radius: 8px;
+    }
+
+    .flow-node.ai {
+      background: rgba(124,92,252,.1);
+      border-color: rgba(124,92,252,.25);
+      color: #a07cff;
+    }
+
+    .flow-node.out {
+      background: rgba(0,229,160,.08);
+      border-color: rgba(0,229,160,.2);
+      color: var(--green);
+    }
+
+    .flow-arr {
+      color: var(--muted);
+      font-size: .8rem;
+      line-height: 1;
+    }
+
+    .auto-label {
+      display: inline-block;
+      background: rgba(79,142,247,.08);
+      border: 1px solid rgba(79,142,247,.18);
+      color: var(--blue-bright);
+      font-size: .68rem; font-weight: 700;
+      letter-spacing: .1em; text-transform: uppercase;
+      padding: 4px 10px; border-radius: 100px;
+      margin-bottom: 1rem;
+    }
+
+    .auto-title {
+      font-family: var(--grotesk);
+      font-size: 1.15rem; font-weight: 700;
+      letter-spacing: -.01em;
+      margin-bottom: .75rem;
+      line-height: 1.3;
+    }
+
+    .auto-desc {
+      color: var(--muted);
+      font-size: .875rem; line-height: 1.75;
+      margin-bottom: 1.25rem;
+    }
+
+    .auto-tech {
+      display: flex; flex-wrap: wrap; gap: 6px;
+    }
+
+    .auto-tech-item {
+      background: rgba(255,255,255,.04);
+      border: 1px solid var(--border);
+      color: var(--light);
+      font-size: .67rem; font-weight: 600;
+      padding: 4px 10px; border-radius: 6px;
+      letter-spacing: .02em;
+    }
+
     /* ─── ABOUT ─── */
     #about { background: var(--bg); }
 
@@ -943,6 +1056,7 @@
       .services-grid { grid-template-columns: 1fr; }
       .case-study { grid-template-columns: 1fr; }
       .cs-visual { min-height: 280px; }
+      .auto-grid { grid-template-columns: 1fr; }
       .about-layout { grid-template-columns: 1fr; gap: 3rem; }
       .about-left { position: static; }
       .contact-layout { grid-template-columns: 1fr; gap: 3.5rem; }
@@ -1264,6 +1378,7 @@
       <p class="s-body">Not mockups. Not concept decks. Things that exist and work.</p>
     </div>
 
+    <!-- Featured: Home Desk -->
     <div class="case-study fade-up">
       <div class="cs-visual">
         <div class="app-mockup">
@@ -1297,28 +1412,25 @@
       </div>
 
       <div class="cs-content">
-        <span class="cs-label">Case Study</span>
+        <span class="cs-label">Custom SaaS App</span>
         <h3 class="cs-title">Home Desk</h3>
         <p class="cs-desc">
-          A full-stack bill management app built for couples — designed to eliminate the recurring
-          stress of "did we pay that?" and give households a single source of truth for everything
-          financial. Includes an AI-powered receipt scanner, shared bill tracking, email automation,
-          and subscription billing.
+          A full-stack bill management app built for households — designed to eliminate the recurring
+          stress of "did we pay that?" and give couples a single source of truth for everything
+          financial. Includes an AI-powered receipt scanner, shared bill tracking, email reminders,
+          cash flow forecasting, and subscription billing.
         </p>
 
         <div class="cs-tech">
           <span class="cs-tech-item">Next.js</span>
           <span class="cs-tech-item">Convex</span>
+          <span class="cs-tech-item">Clerk Auth</span>
           <span class="cs-tech-item">AI Receipt Scanner</span>
           <span class="cs-tech-item">Stripe Billing</span>
-          <span class="cs-tech-item">Email Automation</span>
+          <span class="cs-tech-item">Resend Email</span>
         </div>
 
         <div class="cs-results">
-          <div class="cs-result">
-            <div class="cs-result-val">100%</div>
-            <div class="cs-result-lbl">Custom Build</div>
-          </div>
           <div class="cs-result">
             <div class="cs-result-val">Live</div>
             <div class="cs-result-lbl">In Production</div>
@@ -1327,12 +1439,136 @@
             <div class="cs-result-val">AI</div>
             <div class="cs-result-lbl">Receipt Scanning</div>
           </div>
+          <div class="cs-result">
+            <div class="cs-result-val">Full</div>
+            <div class="cs-result-lbl">Custom Build</div>
+          </div>
         </div>
 
         <a href="https://hellohomedesk.com" target="_blank" rel="noopener" class="arrow-link">
           Visit hellohomedesk.com →
         </a>
       </div>
+    </div>
+
+    <!-- Automation Portfolio Grid -->
+    <div class="auto-subhead fade-up">
+      <div class="s-label">Automation Work</div>
+      <h3 class="auto-subhead-title">n8n workflows built and deployed for real clients and operations.</h3>
+    </div>
+
+    <div class="auto-grid fade-up">
+
+      <!-- Card 1: Manufacturing Metrics Reporter -->
+      <div class="auto-card">
+        <div class="flow-pipeline">
+          <span class="flow-node">Schedule</span>
+          <span class="flow-arr">›</span>
+          <span class="flow-node">Smartsheet API</span>
+          <span class="flow-arr">›</span>
+          <span class="flow-node ai">AI Agent</span>
+          <span class="flow-arr">›</span>
+          <span class="flow-node out">Gmail Report</span>
+        </div>
+        <div class="auto-label">Industrial Automation</div>
+        <h4 class="auto-title">Daily Manufacturing Metrics Reporter</h4>
+        <p class="auto-desc">
+          Every morning at 7am, this workflow pulls production data from Smartsheet — this week's metrics,
+          last week's, and the running master log — feeds it to Gemini 2.5 Pro, and delivers an
+          executive-ready HTML email with KPIs, quality trends, scrap rates, and overtime tracking.
+          Zero manual effort.
+        </p>
+        <div class="auto-tech">
+          <span class="auto-tech-item">n8n</span>
+          <span class="auto-tech-item">Smartsheet API</span>
+          <span class="auto-tech-item">Gemini 2.5 Pro</span>
+          <span class="auto-tech-item">OpenRouter</span>
+          <span class="auto-tech-item">Gmail</span>
+        </div>
+      </div>
+
+      <!-- Card 2: AI LinkedIn Content Engine -->
+      <div class="auto-card">
+        <div class="flow-pipeline">
+          <span class="flow-node">RSS Feeds</span>
+          <span class="flow-arr">›</span>
+          <span class="flow-node ai">GPT-4o</span>
+          <span class="flow-arr">›</span>
+          <span class="flow-node ai">DALL-E 3</span>
+          <span class="flow-arr">›</span>
+          <span class="flow-node out">Review Queue</span>
+        </div>
+        <div class="auto-label">Marketing Automation</div>
+        <h4 class="auto-title">AI LinkedIn Post Generator</h4>
+        <p class="auto-desc">
+          Scans 5 AI news RSS feeds every morning. GPT-4o picks the most compelling story and writes
+          a full LinkedIn post — hook, key insights, CTA, hashtags — then DALL-E generates a custom
+          image to match. Everything lands in a Google Sheets review queue ready to publish in one click.
+        </p>
+        <div class="auto-tech">
+          <span class="auto-tech-item">n8n</span>
+          <span class="auto-tech-item">RSS Feeds</span>
+          <span class="auto-tech-item">GPT-4o</span>
+          <span class="auto-tech-item">DALL-E 3</span>
+          <span class="auto-tech-item">Google Sheets</span>
+        </div>
+      </div>
+
+      <!-- Card 3: AI Voice Survey Agent -->
+      <div class="auto-card">
+        <div class="flow-pipeline">
+          <span class="flow-node">Google Sheets</span>
+          <span class="flow-arr">›</span>
+          <span class="flow-node ai">Retell AI Calls</span>
+          <span class="flow-arr">›</span>
+          <span class="flow-node ai">Transcript</span>
+          <span class="flow-arr">›</span>
+          <span class="flow-node out">Results Logged</span>
+        </div>
+        <div class="auto-label">Customer Outreach</div>
+        <h4 class="auto-title">Automated AI Phone Survey Agent</h4>
+        <p class="auto-desc">
+          Reads a contact list from Google Sheets, uses Retell AI to place real outbound phone calls
+          to each person, waits for each call to complete, captures the full transcript and analysis,
+          and writes results back to the sheet — entirely without a human dialing a single number.
+        </p>
+        <div class="auto-tech">
+          <span class="auto-tech-item">n8n</span>
+          <span class="auto-tech-item">Google Sheets</span>
+          <span class="auto-tech-item">Retell AI</span>
+          <span class="auto-tech-item">Webhooks</span>
+          <span class="auto-tech-item">AI Transcription</span>
+        </div>
+      </div>
+
+      <!-- Card 4: Lead Gen & AI Pre-Qualification -->
+      <div class="auto-card">
+        <div class="flow-pipeline">
+          <span class="flow-node">Google Maps</span>
+          <span class="flow-arr">›</span>
+          <span class="flow-node">Apify Scraper</span>
+          <span class="flow-arr">›</span>
+          <span class="flow-node ai">AI Qualifier</span>
+          <span class="flow-arr">›</span>
+          <span class="flow-node out">CRM</span>
+        </div>
+        <div class="auto-label">Sales Automation</div>
+        <h4 class="auto-title">Google Maps Lead Scraper + AI Qualifier</h4>
+        <p class="auto-desc">
+          Scrapes business listings from Google Maps via Apify, runs each lead through an AI agent
+          that pre-qualifies against your ideal customer profile — filtering by industry, size, and
+          fit signals — then adds only the qualified leads to your CRM ready for outreach. No manual
+          prospecting.
+        </p>
+        <div class="auto-tech">
+          <span class="auto-tech-item">n8n</span>
+          <span class="auto-tech-item">Apify</span>
+          <span class="auto-tech-item">Google Maps</span>
+          <span class="auto-tech-item">AI Agent</span>
+          <span class="auto-tech-item">CRM Integration</span>
+        </div>
+      </div>
+
     </div>
   </section>
 
