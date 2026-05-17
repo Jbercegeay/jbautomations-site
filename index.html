@@ -21,9 +21,9 @@
       --text:       #f0eff8;
       --muted:      #8887a8;
       --light:      #b0b0cc;
-      --blue:       #4f8ef7;
-      --blue-bright:#6ba3ff;
-      --cyan:       #00d4ff;
+      --blue:       #00C9A7;
+      --blue-bright:#00DDB8;
+      --cyan:       #00EDD8;
       --purple:     #7c5cfc;
       --green:      #00e5a0;
       --orange:     #ff6b35;
@@ -69,13 +69,24 @@
     }
 
     .logo {
+      display: flex; align-items: center;
+      text-decoration: none; flex-shrink: 0;
+    }
+
+    .logo img {
+      height: 48px;
+      width: auto;
+      display: block;
+    }
+
+    .logo-fallback {
       font-family: var(--grotesk);
       font-weight: 800; font-size: 1.1rem;
       letter-spacing: -0.02em;
-      color: #fff; text-decoration: none;
+      color: #fff;
     }
 
-    .logo span { color: var(--blue); }
+    .logo-fallback span { color: var(--blue); }
 
     nav ul {
       display: flex; gap: 2rem; list-style: none;
@@ -101,7 +112,7 @@
     .nav-btn:hover {
       background: var(--blue-bright);
       transform: translateY(-1px);
-      box-shadow: 0 4px 18px rgba(79,142,247,0.4);
+      box-shadow: 0 4px 18px rgba(0,201,167,0.4);
     }
 
     /* ─── HERO ─── */
@@ -117,8 +128,8 @@
       content: '';
       position: absolute; inset: 0;
       background-image:
-        linear-gradient(rgba(79,142,247,.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(79,142,247,.03) 1px, transparent 1px);
+        linear-gradient(rgba(0,201,167,.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,201,167,.03) 1px, transparent 1px);
       background-size: 56px 56px;
       mask-image: radial-gradient(ellipse 75% 65% at 50% 40%, black 30%, transparent 100%);
       pointer-events: none;
@@ -128,14 +139,14 @@
       position: absolute; top: 15%; left: 50%;
       transform: translate(-50%,-50%);
       width: 800px; height: 500px;
-      background: radial-gradient(ellipse, rgba(79,142,247,.10) 0%, rgba(124,92,252,.05) 40%, transparent 70%);
+      background: radial-gradient(ellipse, rgba(0,201,167,.10) 0%, rgba(124,92,252,.05) 40%, transparent 70%);
       pointer-events: none;
     }
 
     .hero-badge {
       display: inline-flex; align-items: center; gap: 8px;
-      background: rgba(79,142,247,0.1);
-      border: 1px solid rgba(79,142,247,0.25);
+      background: rgba(0,201,167,0.1);
+      border: 1px solid rgba(0,201,167,0.25);
       color: var(--blue-bright);
       font-size: .78rem; font-weight: 600;
       letter-spacing: .1em; text-transform: uppercase;
@@ -163,7 +174,7 @@
     }
 
     h1 .gradient-text {
-      background: linear-gradient(135deg, var(--blue) 0%, var(--cyan) 50%, var(--purple) 100%);
+      background: linear-gradient(135deg, var(--blue) 0%, var(--purple) 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -195,11 +206,11 @@
 
     .btn-solid {
       color: #fff; background: var(--blue);
-      box-shadow: 0 0 30px rgba(79,142,247,0.28);
+      box-shadow: 0 0 30px rgba(0,201,167,0.28);
     }
     .btn-solid:hover {
       background: var(--blue-bright);
-      box-shadow: 0 6px 30px rgba(79,142,247,0.45);
+      box-shadow: 0 6px 30px rgba(0,201,167,0.45);
     }
 
     .btn-ghost {
@@ -294,7 +305,7 @@
     }
 
     .problem-item:hover {
-      border-color: rgba(79,142,247,0.3);
+      border-color: rgba(0,201,167,0.3);
       transform: translateX(4px);
     }
 
@@ -380,7 +391,7 @@
     .step-n {
       font-family: var(--grotesk);
       font-size: 3rem; font-weight: 800;
-      color: rgba(79,142,247,.1); line-height: 1;
+      color: rgba(0,201,167,.1); line-height: 1;
       margin-bottom: 1rem;
     }
 
@@ -390,7 +401,7 @@
       font-size: 1.3rem; margin-bottom: 1.25rem;
     }
 
-    .step-icon.blue { background: rgba(79,142,247,.12); border: 1px solid rgba(79,142,247,.25); }
+    .step-icon.blue { background: rgba(0,201,167,.12); border: 1px solid rgba(0,201,167,.25); }
     .step-icon.cyan { background: rgba(0,212,255,.10); border: 1px solid rgba(0,212,255,.2); }
     .step-icon.green { background: rgba(0,229,160,.10); border: 1px solid rgba(0,229,160,.2); }
 
@@ -440,9 +451,9 @@
 
     .svc-card:hover {
       background: var(--card-hover);
-      border-color: rgba(79,142,247,.25);
+      border-color: rgba(0,201,167,.25);
       transform: translateY(-4px);
-      box-shadow: 0 16px 48px rgba(0,0,0,.35), 0 0 0 1px rgba(79,142,247,.08);
+      box-shadow: 0 16px 48px rgba(0,0,0,.35), 0 0 0 1px rgba(0,201,167,.08);
     }
 
     .svc-icon {
@@ -451,7 +462,7 @@
       font-size: 1.3rem; margin-bottom: 1.5rem;
     }
 
-    .si-1 { background: rgba(79,142,247,.12); border: 1px solid rgba(79,142,247,.25); }
+    .si-1 { background: rgba(0,201,167,.12); border: 1px solid rgba(0,201,167,.25); }
     .si-2 { background: rgba(124,92,252,.12); border: 1px solid rgba(124,92,252,.25); }
     .si-3 { background: rgba(0,212,255,.10); border: 1px solid rgba(0,212,255,.2); }
     .si-4 { background: rgba(0,229,160,.10); border: 1px solid rgba(0,229,160,.2); }
@@ -503,7 +514,7 @@
       position: absolute; top: 50%; left: 50%;
       transform: translate(-50%,-50%);
       width: 300px; height: 300px;
-      background: radial-gradient(circle, rgba(79,142,247,.2) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(0,201,167,.2) 0%, transparent 70%);
     }
 
     .app-mockup {
@@ -572,8 +583,8 @@
     }
 
     .cs-tech-item {
-      background: rgba(79,142,247,.08);
-      border: 1px solid rgba(79,142,247,.2);
+      background: rgba(0,201,167,.08);
+      border: 1px solid rgba(0,201,167,.2);
       color: var(--blue-bright);
       font-size: .73rem; font-weight: 600;
       padding: 5px 12px; border-radius: 7px;
@@ -643,8 +654,8 @@
 
     .auto-label {
       display: inline-block;
-      background: rgba(79,142,247,.08);
-      border: 1px solid rgba(79,142,247,.18);
+      background: rgba(0,201,167,.08);
+      border: 1px solid rgba(0,201,167,.18);
       color: var(--blue-bright);
       font-size: .68rem; font-weight: 700;
       letter-spacing: .1em; text-transform: uppercase;
@@ -704,7 +715,7 @@
     .about-avatar::before {
       content: '';
       position: absolute; inset: 0;
-      background: radial-gradient(circle at 50% 30%, rgba(79,142,247,.18) 0%, transparent 60%);
+      background: radial-gradient(circle at 50% 30%, rgba(0,201,167,.18) 0%, transparent 60%);
     }
 
     .about-initials {
@@ -749,7 +760,7 @@
       transition: color .2s, border-color .2s;
     }
 
-    .chip:hover { color: var(--blue); border-color: rgba(79,142,247,.3); }
+    .chip:hover { color: var(--blue); border-color: rgba(0,201,167,.3); }
 
     .about-body p {
       font-size: 1rem; color: var(--muted);
@@ -789,7 +800,7 @@
       position: absolute; top: -80px; left: 50%;
       transform: translateX(-50%);
       width: 600px; height: 300px;
-      background: radial-gradient(ellipse, rgba(79,142,247,.1) 0%, transparent 70%);
+      background: radial-gradient(ellipse, rgba(0,201,167,.1) 0%, transparent 70%);
       pointer-events: none;
     }
 
@@ -834,12 +845,12 @@
       transition: background .2s, border-color .2s;
     }
 
-    .copt:hover { background: var(--card-hover); border-color: rgba(79,142,247,.25); }
+    .copt:hover { background: var(--card-hover); border-color: rgba(0,201,167,.25); }
 
     .copt-icon {
       width: 40px; height: 40px; border-radius: 10px;
-      background: rgba(79,142,247,.1);
-      border: 1px solid rgba(79,142,247,.2);
+      background: rgba(0,201,167,.1);
+      border: 1px solid rgba(0,201,167,.2);
       display: flex; align-items: center; justify-content: center;
       font-size: 1rem; flex-shrink: 0;
     }
@@ -887,8 +898,8 @@
     .fg input::placeholder, .fg textarea::placeholder { color: rgba(136,135,168,.5); }
 
     .fg input:focus, .fg textarea:focus, .fg select:focus {
-      border-color: rgba(79,142,247,.45);
-      background: rgba(79,142,247,.03);
+      border-color: rgba(0,201,167,.45);
+      background: rgba(0,201,167,.03);
     }
 
     .fg textarea { resize: vertical; min-height: 110px; }
@@ -907,7 +918,7 @@
     .fsub:hover {
       background: var(--blue-bright);
       transform: translateY(-1px);
-      box-shadow: 0 6px 24px rgba(79,142,247,.4);
+      box-shadow: 0 6px 24px rgba(0,201,167,.4);
     }
 
     /* ─── FOOTER ─── */
@@ -1054,7 +1065,10 @@
 
   <!-- NAV -->
   <nav id="mainNav">
-    <a href="#" class="logo">JB<span>.</span>Automations</a>
+    <a href="#" class="logo">
+      <img src="logo.png" alt="JB Automations" onerror="this.style.display='none';this.nextElementSibling.style.display='inline';" />
+      <span class="logo-fallback" style="display:none;">JB<span>.</span>Automations</span>
+    </a>
     <ul>
       <li><a href="#how">How It Works</a></li>
       <li><a href="#services">Services</a></li>
@@ -1722,7 +1736,7 @@
 
   <!-- FOOTER -->
   <footer>
-    <div class="flogo">JB<span>.</span>Automations</div>
+    <div class="flogo">JB<span style="color:var(--blue);">.</span>Automations</div>
     <p class="fcopy">© 2026 JB Automations. All rights reserved.</p>
     <ul class="fnav">
       <li><a href="#how">How It Works</a></li>
