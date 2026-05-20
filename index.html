@@ -1060,6 +1060,9 @@
       .cs-results { grid-template-columns: repeat(3,1fr); }
     }
   </style>
+
+  <!-- HubSpot Tracking Code -->
+  <script type="text/javascript" id="hs-script-loader" async defer src="//js-na2.hs-scripts.com/246227421.js"></script>
 </head>
 <body>
 
@@ -1793,6 +1796,62 @@
         document.body.style.overflow = '';
       }
     });
+
+    // Contact form → HubSpot + Formspree
+    const contactForm = document.querySelector('.cform');
+    if (contactForm) {
+      contactForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+
+        const btn = contactForm.querySelector('.fsub');
+        btn.disabled = true;
+        btn.textContent = 'Sending…';
+
+        const data = new FormData(contactForm);
+        const fullName = (data.get('name') || '').trim();
+        const nameParts = fullName.split(/\s+/);
+        const firstname = nameParts[0] || '';
+        const lastname = nameParts.slice(1).join(' ') || '';
+        const email = data.get('email') || '';
+        const business = data.get('business') || '';
+        const interest = data.get('interest') || '';
+        const message = data.get('message') || '';
+        const combinedMessage = interest
+          ? `Service Interest: ${interest}\n\n${message}`
+          : message;
+
+        // Push contact identity to HubSpot
+        var _hsq = window._hsq = window._hsq || [];
+        _hsq.push(['identify', {
+          email: email,
+          firstname: firstname,
+          lastname: lastname,
+          company: business,
+          message: combinedMessage
+        }]);
+        _hsq.push(['trackPageView']);
+
+        // Also post to Formspree for email notification
+        try {
+          await fetch('https://formspree.io/f/xlgzaqqy', {
+            method: 'POST',
+            body: data,
+            headers: { 'Accept': 'application/json' }
+          });
+        } catch (err) {
+          // silent — HubSpot contact was already captured
+        }
+
+        // Success state
+        contactForm.innerHTML = `
+          <div style="text-align:center;padding:2.5rem 1rem;">
+            <div style="font-size:2.75rem;margin-bottom:1rem;color:var(--blue);">✓</div>
+            <p style="font-family:var(--grotesk);font-size:1.15rem;font-weight:700;color:#fff;">Message received!</p>
+            <p style="color:var(--muted);margin-top:0.6rem;font-size:0.95rem;">I'll be in touch within 24 hours.</p>
+          </div>
+        `;
+      });
+    }
   </script>
 </body>
 </html>
