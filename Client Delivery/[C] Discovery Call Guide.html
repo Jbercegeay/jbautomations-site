@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Discovery Call Guide — JB Automations</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0f0f1a;
+      --bg2: #161625;
+      --bg3: #1e1e32;
+      --border: rgba(255,255,255,0.08);
+      --text: #ededf5;
+      --muted: #8887a8;
+      --cyan: #00c8ff;
+      --orange: #ff6b35;
+      --green: #00e096;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      font-size: 15px;
+      line-height: 1.6;
+      padding: 2rem;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 2rem;
+    }
+
+    .logo { font-size: .85rem; font-weight: 700; letter-spacing: .1em; color: var(--cyan); text-transform: uppercase; }
+
+    .timer {
+      font-size: 2rem;
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+      color: var(--cyan);
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .timer.warn { color: var(--orange); }
+    .timer-label { font-size: .7rem; color: var(--muted); text-align: center; margin-top: 2px; }
+
+    .phase {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      margin-bottom: 1.25rem;
+      overflow: hidden;
+    }
+
+    .phase-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 1.25rem;
+      cursor: pointer;
+      user-select: none;
+      gap: 1rem;
+    }
+
+    .phase-header:hover { background: var(--bg3); }
+
+    .phase-left { display: flex; align-items: center; gap: .75rem; }
+
+    .phase-num {
+      font-size: .7rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      color: var(--cyan);
+      background: rgba(0,200,255,.1);
+      border: 1px solid rgba(0,200,255,.2);
+      padding: 3px 9px;
+      border-radius: 4px;
+      white-space: nowrap;
+    }
+
+    .phase-title { font-weight: 700; font-size: 1rem; }
+
+    .phase-time {
+      font-size: .75rem;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    .phase-body { padding: 0 1.25rem 1.25rem; display: none; }
+    .phase.open .phase-body { display: block; }
+
+    .script-box {
+      background: rgba(0,200,255,.05);
+      border-left: 3px solid var(--cyan);
+      border-radius: 0 6px 6px 0;
+      padding: .75rem 1rem;
+      margin-bottom: 1rem;
+      font-style: italic;
+      color: rgba(237,237,245,.75);
+      font-size: .9rem;
+    }
+
+    .q-list { list-style: none; padding: 0; }
+    .q-list li {
+      padding: .55rem 0 .55rem 1.5rem;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      font-size: .95rem;
+    }
+    .q-list li:last-child { border-bottom: none; }
+    .q-list li::before {
+      content: '→';
+      position: absolute; left: 0;
+      color: var(--cyan); font-size: .85rem;
+    }
+
+    .section-label {
+      font-size: .68rem;
+      font-weight: 700;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin: 1.1rem 0 .5rem;
+    }
+
+    .stack-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: .5rem;
+    }
+
+    .stack-cat {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: .75rem;
+    }
+
+    .stack-cat-name {
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: .4rem;
+    }
+
+    .stack-items { font-size: .82rem; color: var(--muted); }
+
+    .notes-area {
+      width: 100%;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      font-family: inherit;
+      font-size: .9rem;
+      padding: .75rem;
+      resize: vertical;
+      min-height: 80px;
+      margin-top: .5rem;
+      outline: none;
+    }
+    .notes-area:focus { border-color: rgba(0,200,255,.35); }
+    .notes-area::placeholder { color: rgba(136,135,168,.4); }
+
+    .opp-row {
+      display: flex;
+      gap: .5rem;
+      align-items: flex-start;
+      margin-bottom: .5rem;
+    }
+    .opp-num {
+      font-size: .7rem;
+      font-weight: 700;
+      color: var(--cyan);
+      background: rgba(0,200,255,.1);
+      border: 1px solid rgba(0,200,255,.2);
+      border-radius: 4px;
+      padding: 3px 7px;
+      margin-top: 3px;
+      flex-shrink: 0;
+    }
+    .opp-input {
+      flex: 1;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--text);
+      font-family: inherit;
+      font-size: .9rem;
+      padding: .5rem .75rem;
+      outline: none;
+    }
+    .opp-input:focus { border-color: rgba(0,200,255,.35); }
+    .opp-input::placeholder { color: rgba(136,135,168,.4); }
+
+    .next-grid {
+      display: flex;
+      flex-direction: column;
+      gap: .6rem;
+    }
+    .next-opt {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: .75rem 1rem;
+    }
+    .next-opt-label {
+      font-size: .68rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: .3rem;
+    }
+    .next-opt p { font-style: italic; font-size: .88rem; color: rgba(237,237,245,.75); }
+
+    .checklist { list-style: none; padding: 0; }
+    .checklist li {
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+      padding: .45rem 0;
+      border-bottom: 1px solid var(--border);
+      font-size: .9rem;
+    }
+    .checklist li:last-child { border-bottom: none; }
+    .checklist input[type="checkbox"] { accent-color: var(--cyan); width: 15px; height: 15px; cursor: pointer; flex-shrink: 0; }
+    .checklist label { cursor: pointer; }
+
+    .patterns {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .4rem;
+      margin-top: .5rem;
+    }
+    .pattern-tag {
+      font-size: .75rem;
+      background: rgba(0,224,150,.07);
+      border: 1px solid rgba(0,224,150,.2);
+      color: var(--green);
+      padding: 3px 10px;
+      border-radius: 4px;
+    }
+
+    @media (max-width: 600px) {
+      body { padding: 1rem; }
+      .stack-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div>
+    <div class="logo">JB Automations</div>
+    <div style="font-size:.8rem;color:var(--muted);margin-top:3px;">Discovery Call Guide</div>
+  </div>
+  <div style="text-align:center">
+    <div class="timer" id="timer" onclick="toggleTimer()">30:00</div>
+    <div class="timer-label" id="timerLabel">Click to start</div>
+  </div>
+</header>
+
+<!-- PHASE 1 -->
+<div class="phase open" id="p1">
+  <div class="phase-header" onclick="togglePhase('p1')">
+    <div class="phase-left">
+      <span class="phase-num">01</span>
+      <span class="phase-title">Intro</span>
+    </div>
+    <span class="phase-time">2 min</span>
+  </div>
+  <div class="phase-body">
+    <div class="script-box">"Thanks for taking the time today. I want to spend about 25 minutes learning about your business, what's eating time, and where AI might actually help. If it looks like there is a fit, I can explain the AI Workflow Setup Session as a practical next step. Sound good?"</div>
+    <ul class="q-list">
+      <li>Set the agenda out loud so they know what to expect</li>
+      <li>Keep it relaxed — conversation, not a hard sales pitch</li>
+      <li>You talk ~30% of the time. Listen more than you speak.</li>
+      <li>The goal is fit, not a proposal.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- PHASE 2 -->
+<div class="phase" id="p2">
+  <div class="phase-header" onclick="togglePhase('p2')">
+    <div class="phase-left">
+      <span class="phase-num">02</span>
+      <span class="phase-title">Business Background</span>
+    </div>
+    <span class="phase-time">5 min</span>
+  </div>
+  <div class="phase-body">
+    <ul class="q-list">
+      <li>What does your business do, and who do you serve?</li>
+      <li>How many people are on your team?</li>
+      <li>How long have you been operating?</li>
+      <li>How do you primarily generate revenue — project-based, recurring, product sales, appointments, service visits, or something else?</li>
+      <li>What does a normal busy week look like?</li>
+    </ul>
+    <div class="section-label">Notes</div>
+    <textarea class="notes-area" placeholder="Business type, size, revenue model..."></textarea>
+  </div>
+</div>
+
+<!-- PHASE 3 -->
+<div class="phase" id="p3">
+  <div class="phase-header" onclick="togglePhase('p3')">
+    <div class="phase-left">
+      <span class="phase-num">03</span>
+      <span class="phase-title">Pain Points</span>
+    </div>
+    <span class="phase-time">8 min</span>
+  </div>
+  <div class="phase-body">
+    <ul class="q-list">
+      <li>Walk me through a typical week — what's eating the most time?</li>
+      <li>What does your team do over and over that feels like it should be easier?</li>
+      <li>Where do things fall through the cracks?</li>
+      <li>What gets forgotten, delayed, copied by hand, or retyped between systems?</li>
+      <li>What has actually gone wrong because of a manual process?</li>
+      <li>If you could fix one thing about how your business operates, what would it be?</li>
+    </ul>
+    <div class="section-label">Notes</div>
+    <textarea class="notes-area" placeholder="Biggest time sinks, manual processes, where things break..." style="min-height:110px;"></textarea>
+  </div>
+</div>
+
+<!-- PHASE 4 -->
+<div class="phase" id="p4">
+  <div class="phase-header" onclick="togglePhase('p4')">
+    <div class="phase-left">
+      <span class="phase-num">04</span>
+      <span class="phase-title">Current Tools &amp; Context</span>
+    </div>
+    <span class="phase-time">7 min</span>
+  </div>
+  <div class="phase-body">
+    <div class="script-box">"I want to understand where your business information lives now. The first step with AI is usually not a huge automation. It is getting the right business context organized so AI can actually help."</div>
+    <div class="stack-grid">
+      <div class="stack-cat">
+        <div class="stack-cat-name">Communication</div>
+        <div class="stack-items">Gmail · Outlook · Slack · Teams · Phone · Text</div>
+        <textarea class="notes-area" placeholder="What they use..." style="min-height:50px;margin-top:.5rem;"></textarea>
+      </div>
+      <div class="stack-cat">
+        <div class="stack-cat-name">CRM / Sales</div>
+        <div class="stack-items">HubSpot · Salesforce · Pipedrive · Spreadsheet · Notebook</div>
+        <textarea class="notes-area" placeholder="What they use..." style="min-height:50px;margin-top:.5rem;"></textarea>
+      </div>
+      <div class="stack-cat">
+        <div class="stack-cat-name">Work / Tasks</div>
+        <div class="stack-items">Asana · Monday · Notion · Trello · ClickUp · Paper</div>
+        <textarea class="notes-area" placeholder="What they use..." style="min-height:50px;margin-top:.5rem;"></textarea>
+      </div>
+      <div class="stack-cat">
+        <div class="stack-cat-name">Finance / Billing</div>
+        <div class="stack-items">QuickBooks · Xero · FreshBooks · Stripe · Square · Wave</div>
+        <textarea class="notes-area" placeholder="What they use..." style="min-height:50px;margin-top:.5rem;"></textarea>
+      </div>
+      <div class="stack-cat">
+        <div class="stack-cat-name">Documents / Storage</div>
+        <div class="stack-items">Google Drive · SharePoint · Dropbox · OneDrive · Desktop folders</div>
+        <textarea class="notes-area" placeholder="What they use..." style="min-height:50px;margin-top:.5rem;"></textarea>
+      </div>
+      <div class="stack-cat">
+        <div class="stack-cat-name">Scheduling / Marketing</div>
+        <div class="stack-items">Google Calendar · Calendly · Mailchimp · Facebook · HubSpot</div>
+        <textarea class="notes-area" placeholder="What they use..." style="min-height:50px;margin-top:.5rem;"></textarea>
+      </div>
+      <div class="stack-cat" style="grid-column:1/-1;">
+        <div class="stack-cat-name">Industry-Specific &amp; Custom Tools</div>
+        <textarea class="notes-area" placeholder="Any tools specific to their industry, or anything they built in-house..." style="min-height:60px;margin-top:.5rem;"></textarea>
+      </div>
+      <div class="stack-cat" style="grid-column:1/-1;">
+        <div class="stack-cat-name">Important Business Knowledge</div>
+        <div class="stack-items">SOPs · FAQs · checklists · menus · pricing · customer instructions · owner-only knowledge</div>
+        <textarea class="notes-area" placeholder="What does only the owner know? Where does the team look for answers?" style="min-height:60px;margin-top:.5rem;"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PHASE 5 -->
+<div class="phase" id="p5">
+  <div class="phase-header" onclick="togglePhase('p5')">
+    <div class="phase-left">
+      <span class="phase-num">05</span>
+      <span class="phase-title">AIOS Fit Check</span>
+    </div>
+    <span class="phase-time">5 min</span>
+  </div>
+  <div class="phase-body">
+    <div class="script-box">"The way I think about this is an AI Operating System. That sounds bigger than it is. It just means we organize your business context, tools, files, and workflows in one place so AI can start helping with real work instead of generic answers."</div>
+
+    <div class="section-label">What I'm seeing</div>
+    <div class="opp-row"><span class="opp-num">1</span><input class="opp-input" type="text" placeholder="Repeated manual work, scattered knowledge, or first workflow candidate..." /></div>
+    <div class="opp-row"><span class="opp-num">2</span><input class="opp-input" type="text" placeholder="Current tool/context issue..." /></div>
+    <div class="opp-row"><span class="opp-num">3</span><input class="opp-input" type="text" placeholder="Possible setup session or next-step recommendation..." /></div>
+
+    <div class="section-label">Patterns to watch for</div>
+    <div class="patterns">
+      <span class="pattern-tag">Repetitive data entry between systems</span>
+      <span class="pattern-tag">Manual report generation</span>
+      <span class="pattern-tag">Email / document processing at volume</span>
+      <span class="pattern-tag">Customer comms that should be templated</span>
+      <span class="pattern-tag">Scheduling / coordination overhead</span>
+      <span class="pattern-tag">Owner bottleneck</span>
+      <span class="pattern-tag">"We do this every single week"</span>
+    </div>
+  </div>
+</div>
+
+<!-- PHASE 6 -->
+<div class="phase" id="p6">
+  <div class="phase-header" onclick="togglePhase('p6')">
+    <div class="phase-left">
+      <span class="phase-num">06</span>
+      <span class="phase-title">Next Steps</span>
+    </div>
+    <span class="phase-time">3 min</span>
+  </div>
+  <div class="phase-body">
+    <div class="next-grid">
+      <div class="next-opt">
+        <div class="next-opt-label">Good fit for setup session</div>
+        <p>"Based on what you've told me, I think the right next step is an AI Workflow Setup Session. It's a 60-90 minute working session where we set up your AI Operating System folder structure, capture your business context, and identify the first workflow worth tackling. That session is $150, and it is meant to be a low-risk first step before we talk about audits, projects, or retainers."</p>
+      </div>
+      <div class="next-opt">
+        <div class="next-opt-label">Needs more thinking</div>
+        <p>"Let me think through what I heard and follow up with a summary and a recommendation."</p>
+      </div>
+      <div class="next-opt">
+        <div class="next-opt-label">Clear project, not enough context</div>
+        <p>"There may be a real automation opportunity here, but I would not scope it from a 30-minute call. I would start with the setup session so we can get your business context organized and define the first workflow properly."</p>
+      </div>
+      <div class="next-opt">
+        <div class="next-opt-label">Not a fit yet</div>
+        <p>"I do not think I would recommend a paid session yet. I would start by getting [specific missing piece] clear first. I'm happy to point you in the right direction."</p>
+      </div>
+    </div>
+    <div class="script-box" style="margin-top:1rem;">"I'll send you a follow-up email today with a summary of what we discussed. Does that work for you?"</div>
+  </div>
+</div>
+
+<!-- POST-CALL -->
+<div class="phase" id="p7">
+  <div class="phase-header" onclick="togglePhase('p7')">
+    <div class="phase-left">
+      <span class="phase-num">✓</span>
+      <span class="phase-title">Post-Call Checklist</span>
+    </div>
+    <span class="phase-time">After call</span>
+  </div>
+  <div class="phase-body">
+    <ul class="checklist">
+      <li><input type="checkbox" id="c1"><label for="c1">Send follow-up email within 2 hours</label></li>
+      <li><input type="checkbox" id="c2"><label for="c2">Log client name, business, and top pain points</label></li>
+      <li><input type="checkbox" id="c3"><label for="c3">Note current tools and where business context lives</label></li>
+      <li><input type="checkbox" id="c4"><label for="c4">Mark whether they are a fit for the AI Workflow Setup Session</label></li>
+      <li><input type="checkbox" id="c5"><label for="c5">If fit, include the $150 setup session link or booking instructions</label></li>
+      <li><input type="checkbox" id="c6"><label for="c6">If not fit, send the useful next recommendation</label></li>
+      <li><input type="checkbox" id="c7"><label for="c7">Add to HubSpot or the current tracking system</label></li>
+    </ul>
+  </div>
+</div>
+
+<script>
+  // Phase toggle
+  function togglePhase(id) {
+    const el = document.getElementById(id);
+    el.classList.toggle('open');
+  }
+
+  // Countdown timer
+  let seconds = 30 * 60;
+  let interval = null;
+  let running = false;
+
+  function toggleTimer() {
+    if (running) {
+      clearInterval(interval);
+      running = false;
+      document.getElementById('timerLabel').textContent = 'Paused — click to resume';
+    } else {
+      interval = setInterval(() => {
+        if (seconds <= 0) {
+          clearInterval(interval);
+          document.getElementById('timer').textContent = '00:00';
+          document.getElementById('timerLabel').textContent = 'Time\'s up!';
+          return;
+        }
+        seconds--;
+        const m = Math.floor(seconds / 60);
+        const s = seconds % 60;
+        document.getElementById('timer').textContent =
+          String(m).padStart(2,'0') + ':' + String(s).padStart(2,'0');
+        const el = document.getElementById('timer');
+        el.classList.toggle('warn', seconds < 5 * 60);
+      }, 1000);
+      running = true;
+      document.getElementById('timerLabel').textContent = 'Running — click to pause';
+    }
+  }
+</script>
+
+</body>
+</html>
