@@ -1,0 +1,9 @@
+{
+  "scripts": {
+    "build": "rm -rf public && mkdir -p public && cp index.html logo.png johnny.jpg public/ && cp -R internal public/internal && echo \"Static site ready\""
+  },
+  "devDependencies": {
+    "@vercel/functions": "latest",
+    "typescript": "^6.0.3"
+  }
+}

@@ -88,6 +88,7 @@ _______________________________________________
 ### Important Business Knowledge
 - Where do SOPs, FAQs, checklists, menus, pricing, customer instructions, or team knowledge live?
 - What does only the owner know that the team constantly asks about?
+- Based on what you use today, which tool would be the most valuable first connector for the AIOS?
 
 ---
 
@@ -128,11 +129,11 @@ Pick the right path based on the call.
 
 **If they are a good fit for the setup session:**
 
-> "Based on what you've told me, I think the right next step is an AI Workflow Setup Session. It's a 60-90 minute working session where we set up your AI Operating System folder structure, capture your business context, and identify the first workflow worth tackling. If the workflow is simple, we may map it during the session. If it is bigger, I'll recommend the next step after we see it clearly."
+> "Based on what you've told me, I think the right next step is an AI Workflow Setup Session. It's a 60-90 minute working session where we set up your AI Operating System folder structure, capture your business context, build the initial tool inventory, and identify the first connector that would make the system more useful. After that, I'll recommend the best next paid step, whether that's a connector setup, a workflow build, a knowledge base, a dashboard, or ongoing support."
 
 Then introduce the price:
 
-> "That session is $150. It is meant to be a low-risk first step before we talk about audits, projects, or retainers."
+> "That session is $150. It is meant to be a low-risk first step before we talk about connector setup, automation projects, dashboards, or retainers."
 
 **If they need more thinking:**
 
@@ -140,7 +141,7 @@ Then introduce the price:
 
 **If there is a clear project but not enough context yet:**
 
-> "There may be a real automation opportunity here, but I would not scope it from a 30-minute call. I would start with the setup session so we can get your business context organized and define the first workflow properly."
+> "There may be a real automation opportunity here, but I would not scope it from a 30-minute call. I would start with the setup session so we can get your business context organized, identify the first connector, and define the right next step properly."
 
 **If they are not a fit:**
 
@@ -157,6 +158,8 @@ Then introduce the price:
 - [ ] Send follow-up email within 2 hours.
 - [ ] Log client name, business, and top pain points.
 - [ ] Note current tools and where business context lives.
+- [ ] Note the likely first connector.
+- [ ] Note the likely next paid step: connector, workflow, knowledge base, dashboard, team expansion, or retainer.
 - [ ] Mark whether they are a fit for the AI Workflow Setup Session.
 - [ ] If fit, include the $150 setup session link or booking instructions.
 - [ ] If not fit, send the useful next recommendation.
@@ -168,10 +171,10 @@ Then introduce the price:
 
 Use this language when needed:
 
-> "The setup session does not promise a finished automation. It promises the foundation: your AIOS folder structure, your business context captured, and a clear recommendation for the first workflow AI should help with."
+> "The setup session does not promise a finished automation or live connector setup. It promises the foundation: your AIOS folder structure, your business context captured, your initial tool inventory, and a clear recommendation for the first connector and next paid step."
 
 If the workflow is simple and time allows, map it. If it is complex, recommend it as the next paid step.
 
 ---
 
-*Updated: 2026-05-24. Revised for the AI Workflow Setup Session offer ladder.*
+*Updated: 2026-05-27. Revised for the AI Workflow Setup Session and first-connector recommendation ladder.*
