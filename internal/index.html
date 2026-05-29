@@ -233,6 +233,88 @@
       background: var(--brand-dark);
     }
 
+    .flow-wrap {
+      display: grid;
+      gap: 12px;
+    }
+
+    .flow-start,
+    .flow-step,
+    .price-card {
+      background: var(--soft);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px;
+    }
+
+    .flow-start {
+      border-color: rgba(15, 118, 110, 0.35);
+      background: #e7f5f2;
+    }
+
+    .flow-title,
+    .price-title {
+      display: block;
+      color: var(--brand-dark);
+      font-size: 15px;
+      font-weight: 850;
+      line-height: 1.25;
+      margin-bottom: 4px;
+    }
+
+    .flow-price,
+    .price-amount {
+      display: inline-block;
+      color: #fff;
+      background: var(--brand);
+      border-radius: 999px;
+      padding: 5px 8px;
+      font-size: 12px;
+      font-weight: 850;
+      margin-bottom: 7px;
+    }
+
+    .flow-copy,
+    .price-copy {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.35;
+      margin: 0;
+    }
+
+    .flow-arrow {
+      color: var(--brand-dark);
+      font-size: 24px;
+      font-weight: 900;
+      text-align: center;
+      line-height: 1;
+    }
+
+    .flow-branches,
+    .price-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .flow-step strong {
+      color: var(--ink);
+    }
+
+    .price-card.featured {
+      border-color: rgba(180, 83, 9, 0.38);
+      background: #fff8ed;
+    }
+
+    .price-note {
+      background: #f8fafc;
+      border: 1px solid #dbe4ea;
+      border-radius: 8px;
+      color: #26323a;
+      padding: 14px;
+      margin-top: 12px;
+    }
+
     .tag {
       display: inline-block;
       font-size: 12px;
@@ -350,6 +432,11 @@
         font-size: 13px;
       }
 
+      .flow-branches,
+      .price-grid {
+        grid-template-columns: 1fr;
+      }
+
       .decision-table,
       .decision-table thead,
       .decision-table tbody,
@@ -402,8 +489,9 @@
     </div>
     <nav aria-label="Console sections">
       <a href="#ladder">Offer Ladder</a>
+      <a href="#pricing-flow">Pricing Flow</a>
       <a href="#discovery">Discovery</a>
-      <a href="/internal/discovery-call-guide.html">Full Discovery Guide</a>
+      <a href="./discovery-call-guide.html">Full Discovery Guide</a>
       <a href="#setup">Setup Session</a>
       <a href="#connector">Connector</a>
       <a href="#workflow">Workflow</a>
@@ -437,6 +525,124 @@
         </ol>
       </section>
 
+      <section id="pricing-flow">
+        <h2>Pricing Flow From The $150 Setup</h2>
+        <div class="flow-wrap">
+          <div class="flow-start">
+            <span class="flow-title">AI Workflow Setup Session</span>
+            <span class="flow-price">$150</span>
+            <p class="flow-copy">Set up the AIOS foundation, build the initial tool inventory, identify the first connector, and recommend the next paid step.</p>
+          </div>
+          <div class="flow-arrow">↓</div>
+          <div class="flow-branches">
+            <div class="flow-step">
+              <span class="flow-title">They need access first</span>
+              <span class="flow-price">$750</span>
+              <p class="flow-copy"><strong>First Connector Setup.</strong> One high-value tool, one access method, one real test.</p>
+            </div>
+            <div class="flow-step">
+              <span class="flow-title">They want several tools connected</span>
+              <span class="flow-price">$2,500</span>
+              <p class="flow-copy"><strong>Connector Stack.</strong> Up to three priority connectors. Do not call this "all connectors."</p>
+            </div>
+            <div class="flow-step">
+              <span class="flow-title">They have one painful process</span>
+              <span class="flow-price">$2,500</span>
+              <p class="flow-copy"><strong>First Workflow Build.</strong> One workflow, one owner, one clear before-and-after.</p>
+            </div>
+            <div class="flow-step">
+              <span class="flow-title">They want a bigger first project</span>
+              <span class="flow-price">$1,500-$12,000</span>
+              <p class="flow-copy"><strong>Package path.</strong> AIOS Starter, Connected AIOS, First Workflow Launch, or 90-Day Buildout.</p>
+            </div>
+            <div class="flow-step">
+              <span class="flow-title">Knowledge is scattered</span>
+              <span class="flow-price">$2,000</span>
+              <p class="flow-copy"><strong>Knowledge Base Setup.</strong> Organize docs, SOPs, notes, and answers into AI-readable source material.</p>
+            </div>
+            <div class="flow-step">
+              <span class="flow-title">They want ongoing help</span>
+              <span class="flow-price">$750-$5,000+/mo</span>
+              <p class="flow-copy"><strong>Retainer path.</strong> Lite Support, AI Operator, Build Partner, or Fractional AI Operator.</p>
+            </div>
+          </div>
+        </div>
+
+        <h3>Package Paths</h3>
+        <div class="price-grid">
+          <div class="price-card">
+            <span class="price-title">AIOS Starter</span>
+            <span class="price-amount">$1,500</span>
+            <p class="price-copy">Setup + one connector + first workflow recommendation.</p>
+          </div>
+          <div class="price-card featured">
+            <span class="price-title">Connected AIOS</span>
+            <span class="price-amount">$3,000</span>
+            <p class="price-copy">Setup + up to three priority connectors + workflow map + training walkthrough.</p>
+          </div>
+          <div class="price-card featured">
+            <span class="price-title">First Workflow Launch</span>
+            <span class="price-amount">$4,500</span>
+            <p class="price-copy">Setup + one connector + one workflow build + testing, documentation, and training.</p>
+          </div>
+          <div class="price-card">
+            <span class="price-title">90-Day AIOS Buildout</span>
+            <span class="price-amount">$7,500-$12,000</span>
+            <p class="price-copy">Setup + connector stack + one to three workflow improvements + knowledge base or dashboard POC.</p>
+          </div>
+        </div>
+
+        <h3>One-Off Add-Ons</h3>
+        <div class="price-grid">
+          <div class="price-card">
+            <span class="price-title">Knowledge Base Setup</span>
+            <span class="price-amount">$2,000</span>
+            <p class="price-copy">Starter knowledge system from scattered docs, SOPs, and notes.</p>
+          </div>
+          <div class="price-card">
+            <span class="price-title">Dashboard Proof of Concept</span>
+            <span class="price-amount">$1,250</span>
+            <p class="price-copy">Lightweight visibility layer before investing in a custom dashboard.</p>
+          </div>
+          <div class="price-card">
+            <span class="price-title">Team Operator Expansion</span>
+            <span class="price-amount">$1,500</span>
+            <p class="price-copy">Add one to three operators after the first AIOS is working.</p>
+          </div>
+          <div class="price-card">
+            <span class="price-title">Custom Dashboard</span>
+            <span class="price-amount">$3,500-$8,000+</span>
+            <p class="price-copy">Only after the dashboard proof of concept proves useful.</p>
+          </div>
+        </div>
+
+        <h3>Retainers</h3>
+        <div class="price-grid">
+          <div class="price-card">
+            <span class="price-title">Lite Support</span>
+            <span class="price-amount">$750/mo</span>
+            <p class="price-copy">Monthly audit, up to 2 support hours, small prompt/doc updates.</p>
+          </div>
+          <div class="price-card">
+            <span class="price-title">AI Operator</span>
+            <span class="price-amount">$1,500/mo</span>
+            <p class="price-copy">Monthly check-in, up to 5 support/build hours, one small improvement.</p>
+          </div>
+          <div class="price-card featured">
+            <span class="price-title">Build Partner</span>
+            <span class="price-amount">$3,000/mo</span>
+            <p class="price-copy">Biweekly check-ins, up to 10 hours, one meaningful improvement monthly.</p>
+          </div>
+          <div class="price-card">
+            <span class="price-title">Fractional AI Operator</span>
+            <span class="price-amount">$5,000/mo+</span>
+            <p class="price-copy">Weekly check-ins, active roadmap, multiple improvements, training, and reporting.</p>
+          </div>
+        </div>
+
+        <div class="price-note"><strong>Rule:</strong> if a client asks for "all connectors," steer them to the Connector Stack: up to three priority connectors. More tools become custom scope.</div>
+      </section>
+
       <section id="discovery" class="half">
         <h2>Discovery Call</h2>
         <span class="tag">Goal: qualify setup session</span>
@@ -451,7 +657,7 @@
         <div class="quote">"The first paid step is not a full automation build. It is getting your AI workspace set up with your business context and identifying the first best place to connect it."</div>
         <h3>Close</h3>
         <p>Recommend the AI Workflow Setup Session when they have enough operational complexity to benefit from an AIOS.</p>
-        <a class="action-link" href="/internal/discovery-call-guide.html">Open Full Discovery Call Guide</a>
+        <a class="action-link" href="./discovery-call-guide.html">Open Full Discovery Call Guide</a>
       </section>
 
       <section id="setup" class="half">
