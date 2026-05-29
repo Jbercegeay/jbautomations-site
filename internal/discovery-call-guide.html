@@ -62,6 +62,13 @@
 
     .action-btn:hover { background: rgba(0,200,255,.16); }
 
+    .action-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+    }
+
     .timer {
       font-size: 2rem;
       font-weight: 700;
@@ -311,6 +318,7 @@
 </header>
 
 <div class="actions">
+  <a class="action-btn action-link" href="/internal/">Back to Console</a>
   <button class="action-btn" type="button" onclick="exportNotes()">Export Call Notes</button>
   <button class="action-btn" type="button" onclick="clearSavedCall()">Start New Call / Clear Notes</button>
 </div>
